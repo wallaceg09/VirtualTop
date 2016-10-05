@@ -1,20 +1,20 @@
 package com.wallace.game.virtualtabletop.controller
 
-import com.wallace.game.virtualtabletop.database.memory.ImageDatabaseMemory
-import com.wallace.game.virtualtabletop.model.Image
+import com.wallace.game.virtualtabletop.database.memory.GameMapDatabaseMemory
+import com.wallace.game.virtualtabletop.model.GameMap
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import javax.websocket.server.PathParam
 
 /**
- * Created by Glen on 10/3/2016.
+ * Created by Glen on 10/4/2016.
  */
-@RequestMapping(value = "/image")
+@RequestMapping(value = "/map")
 @RestController
-class ImageController {
+class GameMapController {
     @Autowired
-    private lateinit var database: ImageDatabaseMemory
+    private lateinit var database: GameMapDatabaseMemory
 
     @RequestMapping(value = "/get", method = arrayOf(RequestMethod.GET))
     fun get(@PathParam(value = "id") id: String) = database.getById(id)
@@ -26,10 +26,10 @@ class ImageController {
     fun list() = database.list()
 
     @RequestMapping(value = "/new", method = arrayOf(RequestMethod.POST))
-    fun new(@RequestBody image: Image) =
-        if (database.add(image)) image
-        else throw DuplicateItemException()
+    fun new(@RequestBody map: GameMap) =
+            if (database.add(map)) map
+            else throw DuplicateItemException()
 
-    @ResponseStatus(value = HttpStatus.CONFLICT, reason = "Duplicate item.")//TODO: Move to own file
+    @ResponseStatus(value = HttpStatus.CONFLICT, reason = "Duplicate item.") //TODO: Move to own file
     class DuplicateItemException: RuntimeException() {}
 }
