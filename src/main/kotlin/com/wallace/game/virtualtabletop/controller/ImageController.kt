@@ -1,4 +1,4 @@
-package com.wallace.game.virtualtabletop.controller.rest
+package com.wallace.game.virtualtabletop.controller
 
 import com.wallace.game.virtualtabletop.database.memory.ImageDatabaseMemory
 import com.wallace.game.virtualtabletop.model.Image
