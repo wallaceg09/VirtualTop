@@ -6,6 +6,7 @@ import javax.servlet.ServletRegistration
 /**
  * Created by Glen on 10/3/2016.
  */
+//TODO: Remove
 class WebAppConf : AbstractAnnotationConfigDispatcherServletInitializer() {
     override fun getRootConfigClasses(): Array<out Class<*>> {
         return arrayOf()

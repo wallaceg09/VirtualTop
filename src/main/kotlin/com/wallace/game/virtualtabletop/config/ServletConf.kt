@@ -16,6 +16,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.wallace.game.virtualtabletop.controller")
+//TODO: Remove
 open class ServletConf : WebMvcConfigurerAdapter() {
     @Bean
     open fun multipartResolver(): MultipartResolver = StandardServletMultipartResolver()
@@ -23,7 +24,7 @@ open class ServletConf : WebMvcConfigurerAdapter() {
     @Bean
     open fun internalViewResolver() : ViewResolver {
         var resolver = InternalResourceViewResolver()
-        resolver.setPrefix("/resources/")
+//        resolver.setPrefix("/resources/")
         resolver.setSuffix(".html")
 
         return resolver
