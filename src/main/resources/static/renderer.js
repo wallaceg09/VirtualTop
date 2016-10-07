@@ -8,16 +8,7 @@ var map;
 function preload(){
     game.load.json('map_json', '/map/get?id=242eceff-3ce0-4e23-9183-a63de7cbf66e');
 //    game.load.onFileComplete.add(jsonComplete, this);
-    game.load.image('test', 'test.png');
-}
-
-function jsonComplete(progress, key, success, loaded, total) {
-    if(key == 'map_json') {
-        var tilemap_json = game.cache.getJSON('map_json')['json'];
-        tilemap_json = JSON.parse(tilemap_json);
-
-        game.cache.addTilemap('tilemap_json', null, tilemap_json);
-    }
+    game.load.image('test', 'roguelikeSheet_transparent.png');
 }
 
 function create() {
@@ -28,9 +19,7 @@ function create() {
 
     game.cache.addTilemap('tilemap_json', null, tilemap_json, Phaser.Tilemap.TILED_JSON);
 
-    debugger;
-
-    map = game.add.tilemap('tilemap_json'); // FIXME: How do I use the json property within the map_json?
+    map = game.add.tilemap('tilemap_json');
 
     var imgMap = map_json.imageMap;
 
@@ -40,8 +29,15 @@ function create() {
         map.addTilesetImage(key, val);
     }
 
-    map.createLayer('Floor');
-    map.createLayer('Wall');
+    var layers = tilemap_json.layers;
+
+//    debugger;
+    for(var i = 0; i < layers.length; i++) {
+        map.createLayer(layers[i].name);
+    }
+
+//    map.createLayer('Floor');
+//    map.createLayer('Wall');
 }
 
 function update() {
