@@ -5,6 +5,8 @@ var map;
 // http://www.html5gamedevs.com/topic/7491-async-image-loader/
 // http://www.html5gamedevs.com/topic/9103-synchronous-loading-with-gameloadjson/
 
+// Preload json data, then load images: http://examples.phaser.io/_site/view_full.html?d=loader&f=load+events.js&t=load%20events
+
 function preload(){
     game.load.json('map_json', '/map/get?id=242eceff-3ce0-4e23-9183-a63de7cbf66e');
     game.load.image('test', 'roguelikeSheet_transparent.png');
