@@ -1,5 +1,6 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', {preload: preload, create:create, update: update});
 var map;
+var characterID = "a9729c92-a0ba-4d64-8b01-8022dc5eb0d0";
 
 var stompClient = null;
 
@@ -16,14 +17,15 @@ function preload(){
 }
 
 function create() {
-    parseMap();
-    parseSprites();
-
     connect('/ws');
+
+    parseMap();
+//    parseSprites();
 }
 
-function parseSprites() {
-    game.add.sprite(100, 100, 'sprites', 0);
+function parseSprite(character) {
+//    debugger;
+    game.add.sprite(character.x, character.y, 'sprites', character.sprite);
 }
 
 function parseMap() {
@@ -61,9 +63,8 @@ function connect(endpoint) {
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function(frame) {
         console.log('Connected! Frame: ' + frame);
-        stompClient.subscribe('/topic/heartbeat', function(msg) {
-            console.log(msg);
-        });
+        subscribeToTopics();
+        login();
     });
 
     return stompClient;
@@ -74,4 +75,29 @@ function disconnect() {
         stompClient.disconnect();
         console.log('Disconnected');
     }
+}
+
+function subscribeToTopics() {
+    stompClient.subscribe('/topic/heartbeat', function(msg) {
+        logWebsocketMessage(msg);
+    });
+
+    stompClient.subscribe('/topic/client', function(msg) {
+        logWebsocketMessage(msg);
+    });
+
+    stompClient.subscribe('/character/' + characterID, function(msg) {
+        var msgJSON = JSON.parse(msg.body);
+        parseSprite(msgJSON);
+        logWebsocketMessage(msgJSON);
+    });
+}
+
+function login() {
+    var request = JSON.stringify({'userID':characterID});
+    stompClient.send("/app/login", {}, request );
+}
+
+function logWebsocketMessage(msg) {
+    console.log(msg);
 }

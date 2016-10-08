@@ -21,6 +21,6 @@ class Character() {
         this.x = x
         this.y = y
 
-        this.sprite
+        this.sprite = sprite
     }
 }
