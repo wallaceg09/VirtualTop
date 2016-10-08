@@ -1,5 +1,7 @@
 package com.wallace.game.virtualtabletop
 
+import com.wallace.game.virtualtabletop.service.CharacterService
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
@@ -8,6 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
  */
 @SpringBootApplication
 open class App {
+    @Autowired
+    lateinit var characterService: CharacterService
+
 }
 
 fun main(args:Array<String>) {
