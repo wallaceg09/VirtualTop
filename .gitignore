@@ -6,3 +6,6 @@ gradlew
 gradlew.bat
 src/main/resources/static/test.png
 classes/
+src/main/resources/static/browser_quest/
+*.tmx
+

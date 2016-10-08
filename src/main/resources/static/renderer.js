@@ -12,8 +12,8 @@ var stompClient = null;
 
 function preload(){
     game.load.json('map_json', '/map/get?id=242eceff-3ce0-4e23-9183-a63de7cbf66e');
-    game.load.image('test', 'roguelikeSheet_transparent.png');
-    game.load.spritesheet('sprites', 'roguelikeChar_transparent.png', 16, 16, spacing=1);
+    game.load.image('test', 'browser_quest/img/2/tilesheet.png');
+    game.load.spritesheet('sprites', 'browser_quest/img/2/coder.png', 48, 48, 2);
 }
 
 function create() {
@@ -25,7 +25,7 @@ function create() {
 
 function parseSprite(character) {
 //    debugger;
-    game.add.sprite(character.x, character.y, 'sprites', character.sprite);
+    game.add.sprite(character.x, character.y, 'sprites', frame=character.sprite);
 }
 
 function parseMap() {

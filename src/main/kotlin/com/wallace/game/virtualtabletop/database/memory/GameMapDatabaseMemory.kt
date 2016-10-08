@@ -16,14 +16,14 @@ class GameMapDatabaseMemory {
 
     @PostConstruct
     private fun init() {
-        val file = File(javaClass.classLoader.getResource("static/kenny_debug.json").file)
+        val file = File(javaClass.classLoader.getResource("static/BQ_Debug_Room.json").file)
 
         val reader = FileReader(file)
         val lines = reader.readLines()
         reader.close()
         val json = lines.joinToString(separator = " ")
 
-        maps.add(GameMap(UUID.fromString("242eceff-3ce0-4e23-9183-a63de7cbf66e"), json, "debug_map", mutableMapOf(Pair("roguelikeSheet_transparent", "test"))))
+        maps.add(GameMap(UUID.fromString("242eceff-3ce0-4e23-9183-a63de7cbf66e"), json, "debug_map", mutableMapOf(Pair("tilesheet", "test"))))
     }
 
     fun list() = maps

@@ -5,7 +5,6 @@ import com.wallace.game.virtualtabletop.message.Login
 import com.wallace.game.virtualtabletop.model.Character
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.messaging.handler.annotation.MessageMapping
-import org.springframework.messaging.handler.annotation.SendTo
 import org.springframework.stereotype.Controller
 import org.springframework.stereotype.Service
 import java.util.concurrent.Executors
