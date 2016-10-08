@@ -1,6 +1,8 @@
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'phaser-example', {preload: preload, create:create, update: update});
 var map;
 
+var stompClient = null;
+
 // Async loading:
 // http://www.html5gamedevs.com/topic/7491-async-image-loader/
 // http://www.html5gamedevs.com/topic/9103-synchronous-loading-with-gameloadjson/
@@ -16,6 +18,8 @@ function preload(){
 function create() {
     parseMap();
     parseSprites();
+
+    connect('/ws');
 }
 
 function parseSprites() {
@@ -49,4 +53,25 @@ function parseMap() {
 
 function update() {
 
+}
+
+function connect(endpoint) {
+    var socket = new SockJS(endpoint);
+
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, function(frame) {
+        console.log('Connected! Frame: ' + frame);
+        stompClient.subscribe('/topic/heartbeat', function(msg) {
+            console.log(msg);
+        });
+    });
+
+    return stompClient;
+}
+
+function disconnect() {
+    if (stompClient != null) {
+        stompClient.disconnect();
+        console.log('Disconnected');
+    }
 }
